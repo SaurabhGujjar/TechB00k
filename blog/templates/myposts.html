@@ -1,0 +1,25 @@
+{% extends "login/base.html" %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+    <h1><b>Posts:</b></h1>
+    <hr>
+   {% if post %}
+    {% for po in post %}
+    <h2><a href="{% url 'blog_detail' po.pk%}">{{ po.title }}</a></h2>
+    <h4 ><b><a href="{% url 'myprofile' po.writer %}" style="color:green">{{ po.writer }}</a></b></h4>
+    <small>
+        {{ po.created_on.date }} |&nbsp;
+        Categories:&nbsp;
+        {% for category in po.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %}
+    </small>
+    <p>{{ po.body | slice:":400" }}...</p>
+    {% endfor %}
+    {% else %}
+    <h5>No Posts yet!</h5>
+    {% endif %}
+</div>
+{% endblock %} 

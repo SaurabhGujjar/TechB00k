@@ -1,0 +1,48 @@
+{% load static %}
+<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'blog_index' %}" ><img src="{% static 'img/techbooklogo.png' %}" alt="TechBook" width="50px" height="50px" style="margin-top:-14px;"></a>
+            <a class="navbar-brand" href="{% url 'blog_index' %}" style=" font-family: 'Lobster'; color:white; font-size:40px">TechBook</a>
+          </div>
+          <form class="navbar-form navbar-left" action="{% url 'search' %}">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" name="q" required>
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit" style="font-size:20px">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+    
+    <ul class="nav navbar-nav navbar-right">
+      
+      <li> 
+      {% if data %}
+         <a href="{% url 'myprofile' request.user %}"> <img src="{{ data.url }}" , width="48px", height="48px" style="border: 2px solid; display:block; float:left;
+          padding: 1px;
+          border-radius: 150px;   display: block;
+          margin-left: auto;
+          margin-right: -24px;
+          margin-top: -12px; "></a>
+          {% else %}
+          <a href="{% url 'myprofile' request.user %}"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQv3nHuLlVAoi7LPCEbALFqZtI14jOVu7fPpsSe91DISUNFQLC8&usqp=CAU" , width="48px", height="48px" style="border: 2px solid; display:block; float:left;
+            padding: 1px;
+            border-radius: 150px;   display: block;
+            margin-left: auto;
+            margin-right: -24px;
+            margin-top: -12px; "></a>
+          {% endif %}
+   </li>
+        <li><a href="{% url 'myprofile' request.user %}" style=" font-family: 'Satisfy'; display:block; float:left; color:white; font-size:25px; margin-right:-20px;">{{ request.user }}</a></li>
+        <li><a href="{% url 'user_logout' %}" style="float:right; color:white;"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+      <!-- <form  method="POST" action="/logout/ ">
+        {% csrf_token %}
+        <a href="{% url 'myprofile' request.user %}" style=" display:block; float:left; color:white; font-size:20px; margin-top:10px; margin-right:5px;">{{ request.user }}</a>
+        <input type="submit" class="btn btn-danger navbar-btn" value="Logout">
+    </form>    -->
+</ul>
+        </div>
+      </nav>
+

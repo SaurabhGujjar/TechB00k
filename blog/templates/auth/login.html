@@ -1,0 +1,31 @@
+{% extends 'login/base1.html' %}
+{% block content %}
+
+<body>
+    
+        
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            {{ form.password }}
+        </div> 
+        <button onclick="move()" type="submit" class="btn btn-primary">Login</button>   
+        <p>Don't have an account?
+    <a href="{% url 'user_add' %}">Sign up</a></p>&nbsp;
+    <div class="alert {{msg}}">
+            <p>{{error}}</p> 
+    </div>
+</form>
+<div id="myBar"></div>
+    
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+{% endblock content %}
+    

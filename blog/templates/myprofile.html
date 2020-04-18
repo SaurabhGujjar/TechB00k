@@ -1,0 +1,43 @@
+{% extends "login/base.html" %}
+{% load static %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+ 
+ 
+    {% if pro.pro_pic %}
+    <img src="{{ pro.pro_pic.url }}" alt="", width="300px", height="300px" style="border: 2px solid red;
+    padding: 10px;
+    border-radius: 150px;   display: block;
+    margin-left: auto;
+    margin-right: auto;
+    ">
+    {% else %}
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQv3nHuLlVAoi7LPCEbALFqZtI14jOVu7fPpsSe91DISUNFQLC8&usqp=CAU" alt="", width="300px", height="300px" style="border: 2px solid red;
+    padding: 10px;
+    border-radius: 150px;   display: block;
+    margin-left: auto;
+    margin-right: auto;
+    ">
+    {% endif %}
+    <h1><center>{{ pro.user }}</center></h1>
+    <h5><a href="{% url 'myposts' pro.user%}">Posts<span class="badge badge-primary badge-pill" style= "background-color:red; font-size:13px">{{ totalposts }}</span></a>&nbsp;
+        <a href="{% url 'updateprofile' request.user%}">{{ text }}</a>&nbsp;
+        <a href="{% url 'deluser' request.user%}">{{ deluser }}</a></h5>
+    
+    <h5>About:</h5>
+    <p>{{ pro.about }}</p>
+    <hr style="border: 1px solid white;">
+    <h5>Skills:</h5>
+  <p>{{ pro.skills }}</p>
+  <hr style="border: 1px solid white;">
+  <h5>Email:</h5>
+  <p>{{ pro.user.email }}</p>
+  <hr style="border: 1px solid white;">
+  <h5>Github:</h5>
+    <p>{{ pro.github }}</p>
+    <hr style="border: 1px solid white;">
+    <h5>LinkedIn:</h5>
+    <p>{{ pro.linkdin }}</p>
+  
+</div>
+{% endblock %}

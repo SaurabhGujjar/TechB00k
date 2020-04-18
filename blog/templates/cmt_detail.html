@@ -1,0 +1,35 @@
+{% extends "login/base.html" %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+ 
+    <h3>Comment:</h3>
+ 
+    <p>
+          <span style="font-size:24px"><b>{{ comments.author }}</b></span>&nbsp;
+        {{comments.created_on.date }}
+    </p>
+    <p>{{ comments.body }}</p>
+    <a href="{% url 'delcmt' comments.id %}">  {{ delcmt }} </a>&nbsp;
+    <a href="{% url 'editcmt' comments.id %}"> {{ editcmt }} </a>
+    
+    <hr>
+    <h4>Reply here:</h4>
+    <form  method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.reply_body }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <hr>
+    <h4>Replies:</h4>
+    {% for reply in replies %}
+    <p>
+        <span style="font-size:24px"><b>{{ reply.reply_author }}</b></span>&nbsp;
+        {{reply.created_on.date }}
+    </p>
+    <p>{{ reply.reply_body }}</p>
+    <hr>
+    {% endfor %}
+</div>
+{% endblock %}

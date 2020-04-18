@@ -1,0 +1,41 @@
+{% extends "login/base.html" %}
+{% block content %}
+{% load static %}
+<div class="col-md-8 offset-md-2">
+    <h1>{{ post.title }}</h1>
+    <small>
+        {{ post.created_on.date }} |&nbsp;
+        Categories:&nbsp;
+        {% for category in post.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %}
+    </small>
+    <p>{{ post.body | linebreaks }}</p>
+    <a href="{% url 'delpost' post.pk %}"> {{ dellink }} </a>&nbsp;
+    <a href="{% url 'editpost' post.pk %}"> {{ editlink }} </a>
+    
+
+    <h3>Leave a comment:</h3>
+    <form action="/{{ post.pk }}/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.body }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <h3>Comments:</h3>
+    <hr>
+    {% for comment in comments %}
+    <p>
+          <span style="font-size:24px"><b>{{ comment.author }}</b></span>&nbsp;
+        {{comment.created_on.date }}
+    </p>
+    <p>{{ comment.body }}&nbsp;
+    <a href="{% url 'cmt_detail' comment.pk%}" style="font-size:22px"><img src="{% static 'img/add.svg' %}" style="size:22px"/></a></p>
+    <hr>
+    {% endfor %}
+</div>
+{% endblock %}
+

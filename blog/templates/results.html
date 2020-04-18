@@ -1,0 +1,80 @@
+{% extends "login/base.html" %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+
+        <div class="alert {{msg}}">
+            <p>{{ error }}</p>
+        </div>
+
+          
+     {% if uresults %}
+              <h3>Users:</h3>
+              <hr style="border: 1px solid red;">
+    {% for usr in uresults %}
+        
+    <h3 ><a href="{% url 'myprofile' usr %}" style="">{{ usr }}</a></h3>
+    {% endfor %}  
+    
+    {% endif %}
+
+
+
+    {% if udata %}
+
+    {% for u in udata %}
+        
+    {% for usr in u %}
+    <h3>Users:</h3>
+    <hr style="border: 1px solid red;">
+    <h3 ><a href="{% url 'myprofile' usr %}" style="">{{ usr }}</a></h3>
+    {% endfor %}
+    {% endfor %}       
+    {% endif %}
+        
+    
+
+    {% if results %}
+    
+        <h3>Posts:</h3>
+        <hr style="border: 1px solid red;">
+    {% for post in results %}
+    <h3><a href="{% url 'blog_detail' post.pk%}">{{ post.title }}</a></h3>
+    <h4 ><b><a href="{% url 'myprofile' post.writer %}" style="color:green">{{ post.writer }}</a></b></h4>
+    <small>
+        {{ post.created_on.date }} |&nbsp;
+        Categories:&nbsp;
+        {% for category in post.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %}
+    </small>
+    <p>{{ post.body | slice:":400" }}...</p>
+
+    {% endfor %}
+    {% endif %}
+
+
+    {% if data %}
+    {% for p in data %}
+    {% for post in p %}
+    <h3>Posts:</h3>
+    <hr style="border: 1px solid red;">
+    <h3><a href="{% url 'blog_detail' post.pk%}">{{ post.title }}</a></h3>
+    <h4 ><b><a href="{% url 'myprofile' post.writer %}" style="color:green">{{ post.writer }}</a></b></h4>
+    <small>
+        {{ post.created_on.date }} |&nbsp;
+        Categories:&nbsp;
+        {% for category in post.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %}
+    </small>
+    <p>{{ post.body | slice:":400" }}...</p>
+    {% endfor %}
+    {% endfor %}  
+    {% endif %}
+
+</div>
+{% endblock %} 

@@ -1,0 +1,102 @@
+{% load static %}
+<html>
+    <head>
+        <title>TechBook</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    
+        <style>
+                .container {
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    margin-right: auto;
+                    margin-left: auto;
+                }
+                .navbar-btn {
+                    margin-top: 8px;
+                    margin-bottom: -5px;
+                }
+
+                #loader {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    z-index: 1;
+                    width: 160px;
+                    height: 160px;
+                    margin: -75px 0 0 -75px;
+                    border: 10px solid #f3f3f3;
+                    border-radius: 50%;
+                    border-top: 10px solid rgb(20, 131, 165);
+                    -webkit-animation: spin 2s linear infinite;
+                    animation: spin 2s linear infinite;
+                  }
+                  
+                  @-webkit-keyframes spin {
+                    0% { -webkit-transform: rotate(0deg); }
+                    100% { -webkit-transform: rotate(360deg); }
+                  }
+                  
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+                  
+                  /* Add animation to "page content" */
+                  .animate-bottom {
+                    position: relative;
+                    -webkit-animation-name: animatebottom;
+                    -webkit-animation-duration: 2s;
+                    animation-name: animatebottom;
+                    animation-duration: 2s
+                  }
+                  
+                  @-webkit-keyframes animatebottom {
+                    from { bottom:-100px; opacity:0 } 
+                    to { bottom:0px; opacity:1 }
+                  }
+
+
+
+        </style>
+    </head>
+    <body   onload="myFunction()" style="background-image:url('/static/img/wallpaper.jpg')" >
+
+        <div id="loader"></div>
+        <div style="display:none;" id="myDiv" class="animate-bottom">
+        {% include 'login/header.html' %}
+        
+        <div class="container">
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+
+</div>
+    <script>
+            var myVar;
+            
+            function myFunction() {
+              myVar = setTimeout(showPage, 500);
+            }
+            
+            function showPage() {
+              document.getElementById("loader").style.display = "none";
+              document.getElementById("myDiv").style.display = "block";
+            }
+            </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>

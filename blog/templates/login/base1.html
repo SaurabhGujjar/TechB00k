@@ -1,0 +1,86 @@
+{% load static %}
+<html>
+    <head>
+        <title>TechBook</title>
+        <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    
+        <style>
+                .container {
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    margin-right: auto;
+                    margin-left: auto;
+                }
+                #myProgress {
+                  width: 100%;
+                  background-color: #ddd;
+                }
+                
+                #myBar {
+                  width: 0%;
+                  height: 30px;
+                  background-color: #4CAF50;
+                  text-align: center;
+                  line-height: 30px;
+                  color: white;
+                }
+        </style>
+    </head>
+    <body  style="background-image:url('/static/img/wallpaper.jpg')" >
+
+        <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                      <a class="navbar-brand" href="{% url 'blog_index' %}" ><img src="{% static 'img/techbooklogo.png' %}" alt="TechBook" width="50px" height="50px" style="margin-top:-14px;"></a>
+                      <a class="navbar-brand" href="{% url 'blog_index' %}" style=" font-family: 'Lobster'; color:white; font-size:40px">TechBook</a>
+                  </div>
+                  <ul class="nav navbar-nav navbar-right">
+                    
+                          <li><a href="{% url 'user_add' %}" style="color:white;"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                          
+                        </ul>
+             
+                </div>
+              </nav>
+        
+        
+    
+        
+        <div class="container">
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+    <script>
+        var i = 0;
+        function move() {
+          if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("myBar");
+            var width = 10;
+            var id = setInterval(frame, 10);
+            function frame() {
+              if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+              } else {
+                width++;
+                elem.style.width = width + "%";
+                elem.innerHTML = width  + "%";
+              }
+            }
+          }
+        }
+        </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>

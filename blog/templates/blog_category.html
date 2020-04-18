@@ -1,0 +1,23 @@
+{% extends "login/base.html" %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+    
+    <h2>{{ category | title }}<span class="badge badge-primary badge-pill" style= "background-color:red; font-size:19px">{{ total }}</span></h2>
+    <hr>
+    {% for post in posts %}
+        <h3><a href="{% url 'blog_detail' post.pk%}">{{ post.title }}</a></h3>
+        <small>
+            {{ post.created_on.date }} |&nbsp;
+            Categories:&nbsp;
+            {% for category in post.categories.all %}
+            <a href="{% url 'blog_category' category.name %}">
+                {{ category.name }}
+            </a>&nbsp;
+            {% endfor %}
+        </small>
+        <p>{{ post.body | slice:":400" }}...</p>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}
+
