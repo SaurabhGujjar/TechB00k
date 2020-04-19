@@ -15,10 +15,18 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 import datetime
 from django.db.models import Q
+import threading
+import requests
 
+
+def run_check():
+    threading.Timer(600.0, run_check).start()
+    a = requests.get('https://techb00k.herokuapp.com/')
+    print(a)
 
 def user_login(request):
     context = {}
+    run_check()
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -73,6 +81,7 @@ def user_add(request):
 
 @login_required(login_url='/login/')
 def blog_index(request):
+    run_check()
     posts = Post.objects.all().order_by('-created_on')
     form = PostForm()
     if request.method == 'POST':
