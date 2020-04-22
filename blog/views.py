@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import CommentForm, PostForm, ReplyForm, ProfileForm
+from .forms import CommentForm, PostForm, ReplyForm, ProfileForm, OTPForm
 from django.shortcuts import render
 from blog.models import Post, Comment, Category
 from django.shortcuts import render, get_object_or_404
@@ -17,10 +17,13 @@ import datetime
 from django.db.models import Q
 import threading
 import requests
+from django.core.mail import send_mail
+from django.conf import settings
+import random
 
 
 def run_check():
-    threading.Timer(600.0, run_check).start()
+    threading.Timer(900.0, run_check).start()
     a = requests.get('https://techb00k.herokuapp.com/')
     print(a)
 
@@ -32,6 +35,7 @@ def user_login(request):
         if form.is_valid():
             username =  form.cleaned_data['username']
             password =  form.cleaned_data['password']
+            print(type(username))
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
@@ -39,6 +43,8 @@ def user_login(request):
                     return HttpResponseRedirect(request.GET['next'])
                 return HttpResponseRedirect(reverse('user_success'))
             else:
+                context['username'] = username,
+                context['forgot'] = 'Forgot Password?'
                 context['error'] = 'Invalid Username or Password!'
                 context['msg'] = 'alert-danger'
                 context['form'] = form
@@ -378,6 +384,38 @@ def search(request):
         return render(request, 'results.html', context)
     else:
         return HttpResponseRedirect(reverse('blog_index'))
+
+
+def forgot_password(request, usrname):
+    u = get_object_or_404(User, username=usrname)
+    otp = random.randrange(1234, 99999, 3)
+    print(otp)
+    receiver = u.email
+    print(receiver)
+    subject = 'OTP from TechBook'
+    text = 'Hi '+ str(usrname)+' Your one time password for TechBook.com is: ' + str(otp)
+    print(text)
+    send_mail(str(subject), text, 'saurabhpanwar.volunteer@gmail.com', [str(receiver)])
+    print('mail sent AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+
+
+    if request.method == 'POST':
+        otpform = OTPForm(request.POST)
+        user_form = UserForm(request.POST, instance=u)
+        if user_form.is_valid():
+            pswrd = request.POST['password']
+            user_form.save()
+        else:
+            return render(request, 'recover.html', {'user_from':user_form, 'otpform':otpform})
+    else:
+        user_form = UserForm(instance=u)
+        return render(request, 'recover.html', {'user_form':user_form})
+
+
+            
+
+
+    
 
 
                 

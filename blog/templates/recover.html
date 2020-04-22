@@ -3,28 +3,21 @@
 
 <body>
     
-        
-<form method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-            {{ form.username }}
-        </div>
-        <div class="form-group">
-            {{ form.password }}
-        </div> 
-        <button onclick="move()" type="submit" class="btn btn-primary">Login</button> 
-       
-        <p>Don't have an account?
-    <a href="{% url 'user_add' %}">Sign up</a></p>&nbsp;
-    
- 
-
+        <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                        {{ otpform.body }}
+                       </div>
+                <div class="form-group">
+                 {{ user_form.password }}
+                </div>
+                <button onclick="move()" type="submit" class="btn btn-primary">Change Password</button>
+            </form>
     <div class="alert {{msg}}">
             <p>{{error}}</p> 
     </div>
 
-</form>
-<div id="myBar"></div>
+
     
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

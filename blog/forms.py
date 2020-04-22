@@ -140,7 +140,7 @@ class UserForm(forms.ModelForm):
         max_length=60,
         widget = forms.TextInput(attrs={
             "class" : "form-control",
-            "placeholder" : "User Name"
+            "placeholder" : "User Name (Letters, digits and @/./+/-/_ only without space!)"
         })
     )
 
@@ -166,3 +166,14 @@ class UserForm(forms.ModelForm):
         u.set_password(password)
         u.save()
         return u
+
+
+
+class OTPForm(forms.Form):
+    body = forms.CharField(
+        max_length=60,
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Enter OTP"
+        })
+    )
