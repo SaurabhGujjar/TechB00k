@@ -137,5 +137,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 EMAIL_USE_TLS =True
 EMAIL_HOST ='smtp.gmail.com'
 EMAIL_PORT =587
-EMAIL_HOST_USER ='saurabhpanwar.volunteer@gmail.com'
-EMAIL_HOST_PASSWORD ='sp91221@'
+EMAIL_HOST_USER ='noreply.techbook@gmail.com'
+EMAIL_HOST_PASSWORD ='d!ufe92rh938f9d21#'
